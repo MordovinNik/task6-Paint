@@ -13,8 +13,8 @@ int isKeyUp = 0;
 
 struct Cursor_Points
 {
-  POINT btnDownPoint, firstMouseMovePoint, secondMouseMovePoint;//координаты на экране
-  POINT newBtnDownPoint, newFirstMouseMovePoint, newSecondMouseMovePoint;//координаты на картинке
+  POINT btnDownPoint, firstMouseMovePoint, secondMouseMovePoint;//РєРѕРѕСЂРґРёРЅР°С‚С‹ РЅР° СЌРєСЂР°РЅРµ
+  POINT newBtnDownPoint, newFirstMouseMovePoint, newSecondMouseMovePoint;//РєРѕРѕСЂРґРёРЅР°С‚С‹ РЅР° РєР°СЂС‚РёРЅРєРµ
 }CP;
 
 struct ImagePaintInformation
@@ -25,7 +25,7 @@ struct ImagePaintInformation
   PAINTOBJ PO;
 }IPI;
 
-//////////////////////прототипы
+//////////////////////РїСЂРѕС‚РѕС‚РёРїС‹
 
 LRESULT CALLBACK WndProc(HWND, UINT, UINT, LONG);
 
@@ -154,7 +154,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
         hCdc = CreateCompatibleDC(hdc);
         hOldBitmap = SelectObject(hCdc, IPI.image);
 
-        //переводим из экранных координат к координатам картинки
+        //РїРµСЂРµРІРѕРґРёРј РёР· СЌРєСЂР°РЅРЅС‹С… РєРѕРѕСЂРґРёРЅР°С‚ Рє РєРѕРѕСЂРґРёРЅР°С‚Р°Рј РєР°СЂС‚РёРЅРєРё
 
         CP.newSecondMouseMovePoint.x = CP.secondMouseMovePoint.x * IPI.zoom - IPI.offset.x;
         CP.newSecondMouseMovePoint.y = CP.secondMouseMovePoint.y * IPI.zoom - IPI.offset.y;
@@ -209,24 +209,24 @@ void CreateMainMenu(HWND hWnd)
   HMENU hPopInstrumentMenu = CreatePopupMenu();
   HMENU hPopGeometryMenu = CreatePopupMenu();
 
-  AppendMenu(hMenu, MF_STRING | MF_POPUP, (UINT)hPopSaveMenu, L"Файл");
+  AppendMenu(hMenu, MF_STRING | MF_POPUP, (UINT)hPopSaveMenu, L"Г”Г Г©Г«");
 
-  AppendMenu(hPopSaveMenu, MF_STRING , NEW_FILE, L"Создать");
-  AppendMenu(hPopSaveMenu, MF_STRING, OPEN_FILE, L"Открыть");
-  AppendMenu(hPopSaveMenu, MF_STRING, SAVE_FILE, L"Сохранить");
+  AppendMenu(hPopSaveMenu, MF_STRING , NEW_FILE, L"Г‘Г®Г§Г¤Г ГІГј");
+  AppendMenu(hPopSaveMenu, MF_STRING, OPEN_FILE, L"ГЋГІГЄГ°Г»ГІГј");
+  AppendMenu(hPopSaveMenu, MF_STRING, SAVE_FILE, L"Г‘Г®ГµГ°Г Г­ГЁГІГј");
 
-  AppendMenu(hMenu, MF_STRING | MF_POPUP, (UINT)hPopInstrumentMenu, L"Инструменты");
+  AppendMenu(hMenu, MF_STRING | MF_POPUP, (UINT)hPopInstrumentMenu, L"Г€Г­Г±ГІГ°ГіГ¬ГҐГ­ГІГ»");
 
-  AppendMenu(hPopInstrumentMenu, MF_STRING, INSTRUMENT_PEN, L"Ручка");
-  AppendMenu(hPopInstrumentMenu, MF_STRING, INSTRUMENT_FILLER, L"Заливка");
-  AppendMenu(hPopInstrumentMenu, MF_STRING, INSTRUMENT_ERASER, L"Ластик");
-  AppendMenu(hPopInstrumentMenu, MF_STRING, INSTRUMENT_SETTINGS, L"Настроить инструменты");
+  AppendMenu(hPopInstrumentMenu, MF_STRING, INSTRUMENT_PEN, L"ГђГіГ·ГЄГ ");
+  AppendMenu(hPopInstrumentMenu, MF_STRING, INSTRUMENT_FILLER, L"Г‡Г Г«ГЁГўГЄГ ");
+  AppendMenu(hPopInstrumentMenu, MF_STRING, INSTRUMENT_ERASER, L"Г‹Г Г±ГІГЁГЄ");
+  AppendMenu(hPopInstrumentMenu, MF_STRING, INSTRUMENT_SETTINGS, L"ГЌГ Г±ГІГ°Г®ГЁГІГј ГЁГ­Г±ГІГ°ГіГ¬ГҐГ­ГІГ»");
 
-  AppendMenu(hMenu, MF_STRING | MF_POPUP, (UINT)hPopGeometryMenu, L"Геометрические фигуры");
+  AppendMenu(hMenu, MF_STRING | MF_POPUP, (UINT)hPopGeometryMenu, L"ГѓГҐГ®Г¬ГҐГІГ°ГЁГ·ГҐГ±ГЄГЁГҐ ГґГЁГЈГіГ°Г»");
 
-  AppendMenu(hPopGeometryMenu, MF_STRING, FIGURE_CIRCLE, L"Окружность");
-  AppendMenu(hPopGeometryMenu, MF_STRING, FIGURE_RECTANGLE, L"Прямоугольник");
-  AppendMenu(hPopGeometryMenu, MF_STRING, FIGURE_LINE, L"Линия");
+  AppendMenu(hPopGeometryMenu, MF_STRING, FIGURE_CIRCLE, L"ГЋГЄГ°ГіГ¦Г­Г®Г±ГІГј");
+  AppendMenu(hPopGeometryMenu, MF_STRING, FIGURE_RECTANGLE, L"ГЏГ°ГїГ¬Г®ГіГЈГ®Г«ГјГ­ГЁГЄ");
+  AppendMenu(hPopGeometryMenu, MF_STRING, FIGURE_LINE, L"Г‹ГЁГ­ГЁГї");
 
   SetMenu(hWnd, hMenu);
 
