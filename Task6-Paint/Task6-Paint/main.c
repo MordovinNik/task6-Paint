@@ -1,7 +1,5 @@
 #include <windows.h>
-#include <stdio.h>
 #include "FileSystem.h"
-
 #include "Paint.h"
 #pragma warning(disable:4996)
 
@@ -84,7 +82,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 
         case INSTRUMENT_SETTINGS:
 
-          IPI.PO = GetInstrumentSettings(hWnd);
+          IPI.PO = GetInstrumentSettings();
           break;
       }
 

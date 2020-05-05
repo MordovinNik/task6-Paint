@@ -2,33 +2,32 @@
 
 #define SAVE_SETTINGS 1011
 
-struct Text_Boxes
-{
+
   HWND penColor[3], figureColor[3];
   HWND penLineWidth, figureLineWidth, eraserWidth;
-}TB;
+
 
 PAINTOBJ PO;
 
 LRESULT CALLBACK WndProc2(HWND, UINT, UINT, LONG);
 
-PAINTOBJ GetInstrumentSettings(HWND hParentWnd)
+PAINTOBJ GetInstrumentSettings()
 {
   HWND hWnd = createMyWindow(L"Settings", L"window2", WndProc2, NULL, (RECT) {200,200,400,260});
 
-  TB.penColor[0] = CreateWindow(L"EDIT", L"", WS_BORDER | WS_VISIBLE | WS_CHILD | ES_LEFT | ES_MULTILINE, 170, 10, 60, 20, hWnd, NULL, NULL, NULL);
-  TB.penColor[1] = CreateWindow(L"EDIT", L"", WS_BORDER | WS_VISIBLE | WS_CHILD | ES_LEFT | ES_MULTILINE, 240, 10, 60, 20, hWnd, NULL, NULL, NULL);
-  TB.penColor[2] = CreateWindow(L"EDIT", L"", WS_BORDER | WS_VISIBLE | WS_CHILD | ES_LEFT | ES_MULTILINE, 310, 10, 60 ,20, hWnd, NULL, NULL, NULL);
+  penColor[0] = CreateWindow(L"EDIT", L"", WS_BORDER | WS_VISIBLE | WS_CHILD | ES_LEFT | ES_MULTILINE, 170, 10, 60, 20, hWnd, NULL, NULL, NULL);
+  penColor[1] = CreateWindow(L"EDIT", L"", WS_BORDER | WS_VISIBLE | WS_CHILD | ES_LEFT | ES_MULTILINE, 240, 10, 60, 20, hWnd, NULL, NULL, NULL);
+  penColor[2] = CreateWindow(L"EDIT", L"", WS_BORDER | WS_VISIBLE | WS_CHILD | ES_LEFT | ES_MULTILINE, 310, 10, 60 ,20, hWnd, NULL, NULL, NULL);
   
-  TB.penLineWidth = CreateWindow(L"EDIT", L"", WS_BORDER | WS_VISIBLE | WS_CHILD | ES_LEFT | ES_MULTILINE, 170, 40, 60, 20, hWnd, NULL, NULL, NULL);
+  penLineWidth = CreateWindow(L"EDIT", L"", WS_BORDER | WS_VISIBLE | WS_CHILD | ES_LEFT | ES_MULTILINE, 170, 40, 60, 20, hWnd, NULL, NULL, NULL);
   
-  TB.eraserWidth = CreateWindow(L"EDIT", L"", WS_BORDER | WS_VISIBLE | WS_CHILD | ES_LEFT | ES_MULTILINE, 170, 130, 60, 20, hWnd, NULL, NULL, NULL);
+  eraserWidth = CreateWindow(L"EDIT", L"", WS_BORDER | WS_VISIBLE | WS_CHILD | ES_LEFT | ES_MULTILINE, 170, 130, 60, 20, hWnd, NULL, NULL, NULL);
 
-  TB.figureColor[0] = CreateWindow(L"EDIT", L"", WS_BORDER | WS_VISIBLE | WS_CHILD | ES_LEFT | ES_MULTILINE, 170, 70, 60, 20, hWnd, NULL, NULL, NULL);
-  TB.figureColor[1] = CreateWindow(L"EDIT", L"", WS_BORDER | WS_VISIBLE | WS_CHILD | ES_LEFT | ES_MULTILINE, 240, 70, 60, 20, hWnd, NULL, NULL, NULL);
-  TB.figureColor[2] = CreateWindow(L"EDIT", L"", WS_BORDER | WS_VISIBLE | WS_CHILD | ES_LEFT | ES_MULTILINE, 310, 70, 60, 20, hWnd, NULL, NULL, NULL);
+  figureColor[0] = CreateWindow(L"EDIT", L"", WS_BORDER | WS_VISIBLE | WS_CHILD | ES_LEFT | ES_MULTILINE, 170, 70, 60, 20, hWnd, NULL, NULL, NULL);
+  figureColor[1] = CreateWindow(L"EDIT", L"", WS_BORDER | WS_VISIBLE | WS_CHILD | ES_LEFT | ES_MULTILINE, 240, 70, 60, 20, hWnd, NULL, NULL, NULL);
+  figureColor[2] = CreateWindow(L"EDIT", L"", WS_BORDER | WS_VISIBLE | WS_CHILD | ES_LEFT | ES_MULTILINE, 310, 70, 60, 20, hWnd, NULL, NULL, NULL);
   
-  TB.figureLineWidth = CreateWindow(L"EDIT", L"", WS_BORDER | WS_VISIBLE | WS_CHILD | ES_LEFT | ES_MULTILINE, 170, 100, 60, 20, hWnd, NULL, NULL, NULL);
+  figureLineWidth = CreateWindow(L"EDIT", L"", WS_BORDER | WS_VISIBLE | WS_CHILD | ES_LEFT | ES_MULTILINE, 170, 100, 60, 20, hWnd, NULL, NULL, NULL);
 
   HWND button1 = CreateWindow(L"BUTTON", L"Сохранить", WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON, 130, 170, 80, 20, hWnd, SAVE_SETTINGS, NULL, NULL);
 
@@ -85,25 +84,25 @@ LRESULT CALLBACK WndProc2(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
           WCHAR line[20];
           int number = 0;
 
-          GetWindowText(TB.penColor[0], line,4);
+          GetWindowText(penColor[0], line,4);
           PO.penColor.rgbtRed = _wtoi(line);
-          GetWindowText(TB.penColor[1], line, 4);
+          GetWindowText(penColor[1], line, 4);
           PO.penColor.rgbtGreen = _wtoi(line);
-          GetWindowText(TB.penColor[2], line, 4);
+          GetWindowText(penColor[2], line, 4);
           PO.penColor.rgbtBlue = _wtoi(line);
 
-          GetWindowText(TB.figureColor[0], line, 4);
+          GetWindowText(figureColor[0], line, 4);
           PO.figureColor.rgbtRed = _wtoi(line);
-          GetWindowText(TB.figureColor[1], line, 4);
+          GetWindowText(figureColor[1], line, 4);
           PO.figureColor.rgbtGreen = _wtoi(line);
-          GetWindowText(TB.figureColor[2], line, 4);
+          GetWindowText(figureColor[2], line, 4);
           PO.figureColor.rgbtBlue = _wtoi(line);
 
-          GetWindowText(TB.penLineWidth, line, 20);
+          GetWindowText(penLineWidth, line, 20);
           PO.penWidth = _wtoi(line);
-          GetWindowText(TB.figureLineWidth, line, 20);
+          GetWindowText(figureLineWidth, line, 20);
           PO.figureWidth = _wtoi(line);
-          GetWindowText(TB.eraserWidth, line, 20);
+          GetWindowText(eraserWidth, line, 20);
           PO.eraserWidth = _wtoi(line);
 
           DestroyWindow(hWnd);
